@@ -10,7 +10,7 @@ Tested versions: Istio V1.8.1 and Kubernetes V1.17
 * Successfully tested mTLS from the Client GKE cluster to the Server Cluster with the above listed versions
 * Use Istio Egress Gateway to manage the outgoing traffic from the Client cluster, with ServiceEntry, DestinationRule, VirtualService.
 * Use Intermediate certs instead of Root certs
-* Traffic flow: Http request from the test pod without cert => EnvoyProxy => Cluster1 EgressGateway = mTLS => Cluster2 IngressGateway => destination service
+* Traffic flow: Http request from the test pod without cert (port 80) => EnvoyProxy (port 80 -> 443) => Cluster1 EgressGateway (port 443) = mTLS => Cluster2 IngressGateway (port 443 -> 8000) => destination service (port 8000 -> 80) => application pod 
 * The traffic flow goes into the Server Cluster: Istio Ingress Gateway => Virtual Service => Destination Rule => Envoy Proxy => Target pod
 
 ### References:
